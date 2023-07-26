@@ -1,0 +1,28 @@
+import pandas as pd
+df=pd.read_csv('https://raw.githubusercontent.com/2100040012/Titanic/main/train.csv')
+df
+df_refined=pd.read_csv('https://raw.githubusercontent.com/2100040012/Titanic1/main/train.csv')
+df_refined
+x=df_refined.iloc[:,2:].values
+x
+y=df_refined.iloc[:,1].values
+y
+from sklearn.linear_model import LogisticRegression
+model=LogisticRegression()
+model.fit(x,y)
+df_test=pd.read_csv('https://raw.githubusercontent.com/2100040012/Titanic1_test/main/test%20(1)_refined.csv')
+df_test
+x_test=df_test.values
+x_test
+y_pred=model.predict(x_test)
+y_pred
+import numpy as np
+df_new=pd.read_csv('https://raw.githubusercontent.com/2100040012/Titanic1_test_complete/main/test%20(1).csv')
+df_new
+dict1={
+    'PassengerId':df_new.iloc[:,0],
+    'Survived':y_pred
+}
+df_sub=pd.DataFrame(dict1)
+df_sub
+df_sub.to_csv('Test_submission.csv')
